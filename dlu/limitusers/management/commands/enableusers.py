@@ -26,11 +26,16 @@ class Command(BaseCommand):
         )
 
         def handle(self, *args, **options):
+            disable_dlu = settings.get('DISABLE_USER_REGISTRATION_LIMIT', False)
             limit = settings.get('MAX_USER_REGISTRATIONS')
-            limit = limit - User.objects.all().count()
-            if limit > 0:
+            if not disable_dlu:
+                limit = limit - User.objects.all().count()
+            if disable_dlu or limit > 0:
                 # Get the oldest registered users that are disabled
-                disabled = DisabledUser.objects.all().order_by('user__created')[:(limit-1)]
+                disabled = DisabledUser.objects.all().order_by('user__created')
+                # If disabled, don't limit, and so just enable ALL of them
+                if not disable_dlu:
+                    disabled = disabled[:(limit-1)]
                 users = disabled.user_set
                 user_set.update(disabled=False)
 
