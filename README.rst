@@ -34,11 +34,9 @@ setup).
 You'll also want to add the following config values to ``settings.py``:
 
 * ``MAX_USER_REGISTRATIONS`` (required): maximum number of registrations to enable.
-* ``CLEANUP_DISABLED_USER_MODELS`` (optional): whether or not to delete orphaned
-    instances of ``limitusers.models.DisabledUser``. Default: False.
+* ``CLEANUP_DISABLED_USER_MODELS`` (optional): whether or not to delete orphaned instances of ``limitusers.models.DisabledUser``. Default: False.
 * ``LIMIT_USERS_IGNORE_ADMIN`` (optional): if True, ignore admin users in counts. Default: True.
-* ``DISABLE_USER_REGISTRATION_LIMIT`` (optional): if True, registrations will not be
-    limited and everything works is as if *django-limit-users* isn't installed. Default: False.
+* ``DISABLE_USER_REGISTRATION_LIMIT`` (optional): if True, registrations will not be limited and everything works is as if *django-limit-users* isn't installed. Default: False.
 
 Usage
 =====
