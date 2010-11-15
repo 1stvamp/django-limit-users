@@ -42,3 +42,30 @@ You'll also want to add the following config values to ``settings.py``:
 
 Usage
 =====
+If for example you have your ``MAX_USER_REGISTRATIONS`` value set to ``1000``,
+and you've reached 1000 users, in fact you've got 1215 users (215 of which are
+disabled), after a period of testing you might increase that to ``2000``.
+
+To enable the next batch of available users (like an invite system) you can run::
+
+    python manage.py enableusers -e
+
+(If your Django deployment doesn't use the ``manage.py`` script just replace
+``python manage.py`` above with your management path, e.g. ``bin/django`` for
+buildout).
+
+The ``enableusers`` command, with the ``-e``, will enable the 215 disabled users,
+and print out their email addresses, so that you can send out a "Welcome" email
+of some sort to inform these new lucky beta testers that their accounts are active.
+
+You can also use the ``-i`` option to export a list of IDs, and the option ``-c``
+will display lists of emails and IDs as a comma-seperated list, making sendin
+bulk emails out a bit easier (or using the IDs in model queries).
+
+
+A similar comand, ``enableuser``, is provided if you need to specifically enable
+a particular user.
+
+Some template tags are also provided  in ``limitusers.templatetags.limitusers``
+for handy functionality in templates, such as switching based on available
+registrations, or displaying counts of registrations/enabled users etc.
